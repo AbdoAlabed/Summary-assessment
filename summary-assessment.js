@@ -34,7 +34,9 @@ function each(coll, f) {
   function map(array, func) {
     var acc = [];
     each(array, function(element, i) {
+    	if(func(element, i) !== undefined){
       acc.push(func(element, i));
+      }
     });
     return acc;
   }
@@ -60,6 +62,11 @@ function each(coll, f) {
   
   function wordLengths(str) {
       // TODO: your code here 
+      var s = str.split(' ');
+      var strLength = [];
+       return map(s,function(element , i){
+          return element.length;
+      });
   }
   
   //=============================================================================
@@ -85,6 +92,12 @@ function each(coll, f) {
   
   function wordsLongerThanThree(str) {
       // TODO: your code here 
+      var s = str.split(' ')
+      return map(s , function(element , i){
+            if(element.length > 3){
+            	return element;
+            }
+      })
   }
   
   //=============================================================================
@@ -100,6 +113,10 @@ function each(coll, f) {
   
   function repeatString(str, count) { 
    // TODO: your code here 
+     if(count === 0){
+      return '';
+     }    
+    return str + repeatString(str , count- 1);
   } 
    
   
@@ -129,7 +146,35 @@ function each(coll, f) {
   // pizza.eatSlice();
   
   // Write your code here .....
-  
+  function makePizza(crust , size , numberOfSlice){
+  	//var this.crust = crust;
+  	//var this.size = size;
+  	//var this.numberOfSlice = numberOfSlice;
+  	var ingre = '';
+  	return{
+  		addIngredients : function(ingredient){
+          ingre = ingre +ingredient +' ,';
+  		}
+  		,
+  		displayIngredaints: function(){
+  			return ingre;
+  		},
+  		bakePizza : function(){
+  			return "Your "+crust+" "+size+" "+numberOfSlice+" pizza is done";
+  		} ,
+  		eatSlice: function(){
+        if(numberOfSlice !== 0){
+        	var meg ="You Can eat "+numberOfSlice + " slice";
+        	numberOfSlice --;
+        	return meg;
+        }
+        else{
+           return 'You finished all the slice'
+        }
+  		}
+
+  	}
+  }
   //=============================================================================
   /*                                  Q6                                      */
   //=============================================================================
@@ -155,7 +200,13 @@ function each(coll, f) {
   // Now, to make sure that you are actually reading, make a comment below this and type: Yes I am
   
   // Write your code here .....
-  
+  function ReadingList(){
+  	var books = {};
+  	books.addBook = addBook ;
+    books.unRead = unRead;
+    return books;
+  }
+  var book = ReadingList()
   //=============================================================================
   /*                                  Q7                                       */
   //=============================================================================
@@ -175,7 +226,36 @@ function each(coll, f) {
   //  safe('money','small') => "watch gold-bar money"
   
   // Write your code here .....
-  
+   function makeSafe(intger){
+   	var init = intger;
+   	var i = 1;
+   	var str = '';
+   	var count = 0;
+
+      return{
+      	addItem : function(item , itemSize){
+
+      		switch(itemSize){
+              case 'small': count++; break; 
+              case 'medium': count+=2; break; 
+              case 'big': count+=3; break; 
+      		}
+
+      		  if(i === init){
+      		  	i++;
+              return str;
+           }
+      		else if(count > init){
+      			return "Can't fit"
+      		}
+
+           else{
+           	str = str + item+' ';
+           	i++;
+           }
+      	}
+      }
+   }
   //=============================================================================
   /*                                  Q8                                       */
   //=============================================================================
